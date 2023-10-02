@@ -20,3 +20,10 @@ def positive_assert(name):
 
     # Comprueba si el código de estado es 201
     assert name_response.status_code == 201
+
+#Función para respuestas negativas
+def negative_assert_code_400(name):
+    kit_body = get_kit_body(name)
+
+    name_response = sender_stand_request.post_new_client_kit(kit_body, sender_stand_request.auth_token)
+    assert name_response.status_code == 400
