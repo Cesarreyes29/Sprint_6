@@ -65,3 +65,26 @@ def test_create_kit_space_in_name_get_succes_response():
 # El parámetro "Name" contiene números
 def test_create_kit_numbers_in_name_get_succes_response():
     positive_assert("123")
+
+def negative_assert_no_name(kit_body):
+    name_response = sender_stand_request.post_new_client_kit(kit_body, sender_stand_request.auth_token)
+
+    assert name_response.status_code == 400
+
+    assert name_response.json()["code"] == 400
+
+# Prueba 8. Creación de un nuevo kit
+# se borra el parámetro "Name"
+def test_create_user_no_parameter_name_get_error_response():
+    kit_body = data.kit_body.copy()
+
+    kit_body.pop("name")
+
+    negative_assert_no_name(kit_body)
+
+# Prueba 8. Creación de un nuevo kit
+# contiene parámetro en número
+def test_create_different_parameter_name_get_error_response():
+    kit_body = get_kit_body("123")
+
+    negative_assert_no_name(kit_body)
