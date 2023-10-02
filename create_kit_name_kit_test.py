@@ -27,3 +27,41 @@ def negative_assert_code_400(name):
 
     name_response = sender_stand_request.post_new_client_kit(kit_body, sender_stand_request.auth_token)
     assert name_response.status_code == 400
+
+
+# Prueba 1. Creación de un nuevo kit
+# El parámetro "Name" contiene un caracter
+def test_create_kit_1_letter_in_name_get_success_response():
+    positive_assert("A")
+
+# Prueba 2. Creación de un nuevo kit
+# El parámetro "Name" contiene 511 caracteres
+def test_create_kit_511_letters_in_name_get_succes_response():
+    positive_assert(
+        "AbcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdAbcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabC")
+
+# Prueba 3. Creación de un nuevo kit
+# El parámetro "Name" contiene cero caracteres
+def test_create_kit_0_letters_in_name_get_fail_response():
+    negative_assert_code_400("")
+
+# Prueba 4. Creación de un nuevo kit
+# El parámetro "Name" contiene 512 caracteres
+def test_create_kit_512_letters_in_name_get_fail_response():
+    negative_assert_code_400(
+        "AbcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdAbcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcD")
+
+# Prueba 5. Creación de un nuevo kit
+# El parámetro "Name" contiene caracteres especiales
+def test_create_kit_special_character_in_name_get_succes_response():
+    positive_assert("\"№%@\",")
+
+# Prueba 6. Creación de un nuevo kit
+# El parámetro "Name" contiene un espacio
+def test_create_kit_space_in_name_get_succes_response():
+    positive_assert("A aa")
+
+# Prueba 7. Creación de un nuevo kit
+# El parámetro "Name" contiene números
+def test_create_kit_numbers_in_name_get_succes_response():
+    positive_assert("123")
