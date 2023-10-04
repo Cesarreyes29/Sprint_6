@@ -20,7 +20,7 @@ def positive_assert(name):
 
     # Comprueba si el código de estado es 201
     assert name_response.status_code == 201
-    # Comparar un parametro agregado
+    # Se agreggo assert para Comparar un parámetro agregado
     assert name_response.json()['name'] == kit_body['name']
 
 #Función para respuestas negativas
