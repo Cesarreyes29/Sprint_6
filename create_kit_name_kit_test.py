@@ -20,6 +20,8 @@ def positive_assert(name):
 
     # Comprueba si el código de estado es 201
     assert name_response.status_code == 201
+    # Se agreggo assert para Comparar un parámetro agregado
+    assert name_response.json()['name'] == kit_body['name']
 
 #Función para respuestas negativas
 def negative_assert_code_400(name):
@@ -27,7 +29,6 @@ def negative_assert_code_400(name):
 
     name_response = sender_stand_request.post_new_client_kit(kit_body, sender_stand_request.auth_token)
     assert name_response.status_code == 400
-
 
 # Prueba 1. Creación de un nuevo kit
 # El parámetro "Name" contiene un caracter
@@ -65,6 +66,7 @@ def test_create_kit_space_in_name_get_succes_response():
 # El parámetro "Name" contiene números
 def test_create_kit_numbers_in_name_get_succes_response():
     positive_assert("123")
+
 
 def negative_assert_no_name(kit_body):
     name_response = sender_stand_request.post_new_client_kit(kit_body, sender_stand_request.auth_token)
