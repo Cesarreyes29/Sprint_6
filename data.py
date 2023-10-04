@@ -1,5 +1,5 @@
 headers = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json" # se borro de aqui el parametro token para poder agregarlo a una función
 }
 
 user_body = {
